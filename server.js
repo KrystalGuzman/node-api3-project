@@ -1,7 +1,7 @@
 const express = require('express');
 
 const userRouter = require('./users/userRouter');
-const postROuter = require('./posts/postRouter');
+const postRouter = require('./posts/postRouter');
 
 const server = express();
 
@@ -12,11 +12,7 @@ server.get('/', (req, res) => {
 //custom middleware
 
 function logger(req, res, next) {
-    //log information about the request to the console -> GET to /
-    const method = req.method;
-    const endpoint = req.originalUrl;
-    const time = Date().toISOString();
-    console.log(`${method} to ${endpoint} at ${time}`)
+    console.log(`[${new Date().toISOString()}] ${req.method} to ${req.url}`)
   
     next(); //moves the request to the next middleware
 }
