@@ -16,7 +16,7 @@ router.post('/', validateUser, (req, res) => {
 
 router.post('/:id/posts', validatePost, (req, res) => {
   // do your magic!
-  const newPost = { ...req.body, userId: req.params.id}
+  const newPost = { ...req.body, user_id: req.params.id}
   Posts.insert(newPost)
   .then(post => {
     res.status(201).json(post)
@@ -82,7 +82,7 @@ router.put('/:id', validateUserId, (req, res) => {
   Users.update(id, req.body)
   .then(user => {
     if(user){
-      res.status(200).json({message: "User updated sucessfully"});
+      res.status(200).json({message: "User updated successfully"});
     } else {
       res.status(404).json({error: "No user with that id exists"})
     }
@@ -109,7 +109,7 @@ function validateUserId(req, res, next) {
     }
   })
   .catch (err =>{
-    console.log(res.status(500).json({error: "There was an error validating the user id"}))
+    console.log(res.status(500).json({error: "There was an error validating the user id", err}))
   })
 }
 

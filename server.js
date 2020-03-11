@@ -22,5 +22,8 @@ server.use(logger);
 server.use("/api/users", userRouter);
 server.use("/api/posts", postRouter);
 
+server.use(function(req,res,next){
+  res.status(404).json({ message: "Did not find what you're looking for"})
+})
 
 module.exports = server;
